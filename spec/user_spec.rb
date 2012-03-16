@@ -21,7 +21,6 @@ describe User do
         "type" => "User",
         "following" => 0,
         "hireable?" => false,
-        "public_repos" => 3,
         "followers" => 132,
         "html_url" => "https://github.com/octocat",
         "bio" => nil,
@@ -45,6 +44,14 @@ describe User do
       user.should_not respond_to :login
       user.should_not respond_to :following
       user.should_not respond_to :followers
+    end
+
+    it "should be able to return all user's repositories" do
+      user = User.find('guilhermeportoes')
+      user.public_repos.count.should == 2
+      repo = user.public_repos[0]
+      repo.name.should == 'janelas'
+      repo.language.should == 'Python'
     end
   end
 end

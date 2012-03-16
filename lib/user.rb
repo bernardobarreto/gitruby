@@ -20,13 +20,16 @@ class User
       end
       send("#{attr}=", value)
     end
+    begin
+      self.singleton_class.send(:remove_method, :public_repos); rescue
+    end
   end
 
   def self.find(username)
     new(HTTParty.get "#{BASE_URL}users/#{username}")
   end
 
-  def repos
+  def public_repos
     if not @repos
       params = HTTParty.get "#{BASE_URL}users/#{@login}/repos"
       @repos = []
