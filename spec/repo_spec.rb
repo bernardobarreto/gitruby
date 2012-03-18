@@ -60,5 +60,10 @@ describe Repo do
       repo.should_not respond_to :following
       repo.should_not respond_to :followers
     end
+
+    it 'should returns a list of repository collaborators' do
+      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo.collaborators[0].login.should == 'guilhermeportoes'
+    end
   end
 end
