@@ -1,6 +1,6 @@
 = gitruby
 
-Description goes here.
+Yet another github api wrapper in ruby
 
 == Contributing to gitruby
 
