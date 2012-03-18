@@ -19,9 +19,23 @@ class Org
       end
       send("#{attr}=", value)
     end
+    begin
+      self.singleton_class.send(:remove_method, :public_repos); rescue
+    end
   end
 
   def self.find(name)
     new(HTTParty.get "#{BASE_URL}orgs/#{name}")
+  end
+
+  def public_repos
+    if not @repos
+      params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
+      @repos = []
+      params.each do |repo|
+        @repos << Repo.new(repo)
+      end
+    end
+    return @repos
   end
 end
