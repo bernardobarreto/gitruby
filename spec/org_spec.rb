@@ -43,5 +43,10 @@ describe Org do
       repo = org.public_repos[0]
       repo.name.should == 'ShadowLinux'
     end
+
+    it 'should return a list of all members in a org' do
+      org = Org.find('shadowlinux')
+      org.members[0].login.should == 'angelonuffer'
+    end
   end
 end

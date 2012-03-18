@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'httparty'
+require File.dirname(__FILE__) + '/user'
 
 class Org
   BASE_URL = 'https://api.github.com/'
@@ -26,6 +27,18 @@ class Org
 
   def self.find(name)
     new(HTTParty.get "#{BASE_URL}orgs/#{name}")
+  end
+
+  def members
+    if not @members
+      params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
+      @members = []
+      params.each do |member|
+        # TODO: This cause to many requests, better solution ?
+        @members << User.new(member['login'])
+      end
+    end
+    return @members
   end
 
   def public_repos
