@@ -53,6 +53,12 @@ describe User do
       repo.name.should == 'janelas'
       repo.language.should == 'Python'
     end
+
+    it "should be able to return all user's orgs" do
+      user = User.find('bernardofire')
+      user.orgs[0].login.should == 'nsi-iff'
+      user.orgs[1].login.should == 'cobrateam'
+    end
   end
 end
 

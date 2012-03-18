@@ -29,6 +29,17 @@ class User
     new(HTTParty.get "#{BASE_URL}users/#{username}")
   end
 
+  def orgs
+    if not @orgs
+      params = HTTParty.get "#{BASE_URL}users/#{@login}/orgs"
+      @orgs = []
+      params.each do |org|
+        @orgs << Org.new(org)
+      end
+    end
+    return @orgs
+  end
+
   def public_repos
     if not @repos
       params = HTTParty.get "#{BASE_URL}users/#{@login}/repos"
