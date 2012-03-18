@@ -1,5 +1,5 @@
 require 'httparty'
-require './lib/repo'
+require File.dirname(__FILE__) + '/repo'
 
 class User
   BASE_URL = 'https://api.github.com/'
