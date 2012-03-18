@@ -33,9 +33,6 @@ class Repo
     end
     return @collaborators
   end
-  self.singleton_class.send(:define_method, :collaborators) do
-    collaborators
-  end
 
   def self.find(repository, owner_login)
     new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
