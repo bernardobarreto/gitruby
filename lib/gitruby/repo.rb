@@ -34,6 +34,18 @@ class Repo
     return @collaborators
   end
 
+  def collaborator(login)
+    if @collaborators
+      @collaborators.each do |user|
+        if user.login == login
+          return user
+        end
+      end
+    else
+      return User.find(login)
+    end
+  end
+
   def self.find(repository, owner_login)
     new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
   end

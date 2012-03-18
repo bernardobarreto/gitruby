@@ -65,5 +65,18 @@ describe Repo do
       repo = Repo.find('janelas', 'guilhermeportoes')
       repo.collaborators[0].login.should == 'guilhermeportoes'
     end
+
+    it 'should returns user object if the user is a repository collaborator' do
+      repo = Repo.find('janelas', 'guilhermeportoes')
+      collaborator = repo.collaborator('guilhermeportoes')
+      collaborator.login.should == 'guilhermeportoes'
+    end
+
+    it 'if repo collaborators was already called, repo collaborator should search in @collaborators' do
+      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo.collaborators
+      collaborator = repo.collaborator('guilhermeportoes')
+      collaborator.login.should == 'guilhermeportoes'
+    end
   end
 end
