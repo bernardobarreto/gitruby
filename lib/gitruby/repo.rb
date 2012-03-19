@@ -10,7 +10,7 @@ class Repo
       params = HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{params}"
     end
     params.each do |attr, value|
-      if not attr == 'forks'
+      if not ['forks'].include? attr
         if !!value == value
           self.singleton_class.send(:attr_writer, attr)
           self.singleton_class.send(:define_method, "#{attr}?") do
