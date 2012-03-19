@@ -24,11 +24,9 @@ describe Repo do
         "has_wiki?"=>true,
         "homepage"=>"",
         "svn_url"=>"https://github.com/guilhermeportoes/janelas",
-        "open_issues"=>0,
-        "updated_at"=>"2011-10-04T16:46:21Z",
-        "watchers"=>1,
+        "open_issues"=>1,
+        "watchers"=>2,
         "fork?"=>false,
-        "pushed_at"=>"2011-07-08T23:05:46Z",
         "language"=>"Python",
         "private?"=>false,
         "git_url"=>"git://github.com/guilhermeportoes/janelas.git",
@@ -50,7 +48,6 @@ describe Repo do
         "id"=>2020355,
         "html_url"=>"https://github.com/guilhermeportoes/janelas",
         "description"=>"Uma merda que assolará a humanidade.",
-        "forks"=>1
       }
     end
 
