@@ -10,18 +10,17 @@ class User
       @login = params
     end
     params.each do |attr, value|
-      if !!value == value
-        self.singleton_class.send(:attr_writer, attr)
-        self.singleton_class.send(:define_method, "#{attr}?") do
-          instance_variable_get("@#{attr}")
+      if not ['followers', 'following', 'public_repos'].include? attr
+        if !!value == value
+          self.singleton_class.send(:attr_writer, attr)
+          self.singleton_class.send(:define_method, "#{attr}?") do
+            instance_variable_get("@#{attr}")
+          end
+        else
+          self.singleton_class.send(:attr_accessor, attr)
         end
-      else
-        self.singleton_class.send(:attr_accessor, attr)
+        send("#{attr}=", value)
       end
-      send("#{attr}=", value)
-    end
-    begin
-      self.singleton_class.send(:remove_method, :public_repos); rescue
     end
   end
 
@@ -49,5 +48,27 @@ class User
       end
     end
     return @repos
+  end
+
+  def followers
+    if not @followers
+      params = HTTParty.get "#{BASE_URL}users/#{@login}/followers"
+      @followers = []
+      params.each do |user|
+        @followers << User.new(user)
+      end
+    end
+    return @followers
+  end
+
+  def following
+    if not @following
+      params = HTTParty.get "#{BASE_URL}users/#{@login}/following"
+      @following = []
+      params.each do |user|
+        @following << User.new(user)
+      end
+    end
+    return @following
   end
 end

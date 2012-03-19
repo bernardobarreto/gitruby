@@ -19,9 +19,7 @@ describe User do
       # temporary solution
       {
         "type" => "User",
-        "following" => 0,
         "hireable?" => false,
-        "followers" => 132,
         "html_url" => "https://github.com/octocat",
         "bio" => nil,
         "avatar_url" => "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
@@ -42,8 +40,8 @@ describe User do
     it 'should not respond to github attributes when there are no results' do
       user = User.new('')
       user.should_not respond_to :login
-      user.should_not respond_to :following
-      user.should_not respond_to :followers
+      user.should_not respond_to :email
+      user.should_not respond_to :company
     end
 
     it "should be able to return all user's repositories" do
@@ -58,6 +56,18 @@ describe User do
       user = User.find('bernardofire')
       user.orgs[0].login.should == 'nsi-iff'
       user.orgs[1].login.should == 'cobrateam'
+    end
+
+    it "should return a list of followers" do
+      user = User.find('guilhermeportoes')
+      follower = user.followers[0]
+      follower.login.should == 'firetest'
+    end
+
+    it "should return a list of who I'm following" do
+      user = User.find('firetest')
+      following = user.following[0]
+      following.login.should == 'guilhermeportoes'
     end
   end
 end
