@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'httparty'
 require File.dirname(__FILE__) + '/user'
+require File.dirname(__FILE__) + '/issue'
 
 class Repo
   BASE_URL = 'https://api.github.com/'
@@ -22,6 +23,10 @@ class Repo
         send("#{attr}=", value)
       end
     end
+  end
+
+  def self.find(repository, owner_login)
+    new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
   end
 
   def forks
@@ -59,7 +64,14 @@ class Repo
     end
   end
 
-  def self.find(repository, owner_login)
-    new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
+  def issues
+    if not @issues
+      params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
+      @issues = []
+      params.each do |issue|
+        @issues << Issue.new(issue)
+      end
+    end
+    return @issues
   end
 end

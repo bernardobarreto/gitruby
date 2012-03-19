@@ -82,5 +82,11 @@ describe Repo do
       repo_fork.fork?.should == true
       repo_fork.owner['login'].should == 'firetest'
     end
+
+    it 'should return a list of issues objects' do
+      repo = Repo.find('janelas', 'guilhermeportoes')
+      issue = repo.issues[0]
+      issue.title.should == 'this is a issue'
+    end
   end
 end
