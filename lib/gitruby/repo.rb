@@ -10,16 +10,29 @@ class Repo
       params = HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{params}"
     end
     params.each do |attr, value|
-      if !!value == value
-        self.singleton_class.send(:attr_writer, attr)
-        self.singleton_class.send(:define_method, "#{attr}?") do
-          instance_variable_get("@#{attr}")
+      if not attr == 'forks'
+        if !!value == value
+          self.singleton_class.send(:attr_writer, attr)
+          self.singleton_class.send(:define_method, "#{attr}?") do
+            instance_variable_get("@#{attr}")
+          end
+        else
+          self.singleton_class.send(:attr_accessor, attr)
         end
-      else
-        self.singleton_class.send(:attr_accessor, attr)
+        send("#{attr}=", value)
       end
-      send("#{attr}=", value)
     end
+  end
+
+  def forks
+    if not @forks
+      params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks"
+      @forks = []
+      params.each do |fork|
+        @forks << Repo.new(fork)
+      end
+    end
+    return @forks
   end
 
   def collaborators

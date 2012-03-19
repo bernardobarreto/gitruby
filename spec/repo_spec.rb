@@ -78,5 +78,12 @@ describe Repo do
       collaborator = repo.collaborator('guilhermeportoes')
       collaborator.login.should == 'guilhermeportoes'
     end
+
+    it 'forks should return a list of repos objects' do
+      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo_fork = repo.forks[0]
+      repo_fork.fork?.should == true
+      repo_fork.owner['login'].should == 'firetest'
+    end
   end
 end
