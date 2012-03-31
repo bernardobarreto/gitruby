@@ -44,7 +44,6 @@ describe Repo do
             "https://secure.gravatar.com/avatar/ba75dfc160b255796e769759ef482960?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"},
         "name"=>"janelas",
         "has_issues?"=>true,
-        "master_branch"=>nil,
         "id"=>2020355,
         "html_url"=>"https://github.com/guilhermeportoes/janelas",
         "description"=>"Uma merda que assolará a humanidade.",
