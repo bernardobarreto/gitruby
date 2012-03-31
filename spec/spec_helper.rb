@@ -3,3 +3,4 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'rspec'
 require 'gitruby'
+require 'fakeweb_helper'

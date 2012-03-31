@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "spec_helper"
+include FakeWebHelper
 
 describe Issue do
   context "without authentication" do
