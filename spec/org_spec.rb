@@ -40,14 +40,14 @@ describe Org do
 
     it "should be able to return all org's repositories" do
       org = Org.find('ShadowLinux')
-      org.public_repos.count.should == 3
+      org.public_repos.count.should == 1
       repo = org.public_repos[0]
       repo.name.should == 'ShadowLinux'
     end
 
     it 'should return a list of all members in a org' do
-      org = Org.find('shadowlinux')
-      org.members[0].login.should == 'angelonuffer'
+      org = Org.find('ShadowLinux')
+      org.members[0].login.should == 'octocat'
     end
   end
 end
