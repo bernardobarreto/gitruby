@@ -16,7 +16,6 @@ describe User do
     end
 
     def get_octocat_user
-      # temporary solution
       {
         "type" => "User",
         "hireable?" => false,
@@ -45,29 +44,28 @@ describe User do
     end
 
     it "should be able to return all user's repositories" do
-      user = User.find('guilhermeportoes')
-      user.public_repos.count.should == 2
+      user = User.find('octocat')
+      user.public_repos.count.should == 1
       repo = user.public_repos[0]
-      repo.name.should == 'janelas'
-      repo.language.should == 'Python'
+      repo.name.should == 'hello-world'
+      repo.language.should == nil
     end
 
     it "should be able to return all user's orgs" do
-      user = User.find('bernardofire')
-      user.orgs[0].login.should == 'nsi-iff'
-      user.orgs[1].login.should == 'cobrateam'
+      user = User.find('octocat')
+      user.orgs[0].login.should == 'cobrateam'
     end
 
     it "should return a list of followers" do
-      user = User.find('guilhermeportoes')
+      user = User.find('octocat')
       follower = user.followers[0]
-      follower.login.should == 'firetest'
+      follower.login.should == 'bernardofire'
     end
 
     it "should return a list of who I'm following" do
-      user = User.find('firetest')
+      user = User.find('octocat')
       following = user.following[0]
-      following.login.should == 'guilhermeportoes'
+      following.login.should == 'bernardofire'
     end
   end
 end

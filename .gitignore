@@ -3,3 +3,4 @@
 *.swo
 coverage
 .DS_Store
+.rvmrc

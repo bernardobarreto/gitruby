@@ -4,50 +4,49 @@ require "spec_helper"
 describe Repo do
   context "without authentication" do
     it "should be findable by the github username/repository" do
-      repo = Repo.find('janelas', 'guilhermeportoes')
-      repo.name.should == 'janelas'
-      repo.html_url.should == 'https://github.com/guilhermeportoes/janelas'
+      repo = Repo.find('hello-world', 'octocat')
+      repo.name.should == 'hello-world'
+      repo.html_url.should == 'https://github.com/octocat/hello-world'
     end
 
     it "should convert the hash from api.github to public attributes" do
-      repo = Repo.find('janelas', 'guilhermeportoes')
-      get_janelas_repo.each do |key, value|
+      repo = Repo.find('hello-world', 'octocat')
+      get_hello_world_repo.each do |key, value|
         repo.public_send(key).should == value
       end
     end
 
-    def get_janelas_repo
-      # temporary solution
-      {
-        "url"=>"https://api.github.com/repos/guilhermeportoes/janelas",
-        "mirror_url"=>nil,
-        "has_wiki?"=>true,
-        "homepage"=>"",
-        "svn_url"=>"https://github.com/guilhermeportoes/janelas",
-        "open_issues"=>1,
-        "watchers"=>2,
-        "fork?"=>false,
-        "language"=>"Python",
-        "private?"=>false,
-        "git_url"=>"git://github.com/guilhermeportoes/janelas.git",
-        "ssh_url"=>"git@github.com:guilhermeportoes/janelas.git",
-        "clone_url"=>"https://github.com/guilhermeportoes/janelas.git",
-        "size"=>96,
-        "has_downloads?"=>true,
-        "created_at"=>"2011-07-08T22:28:10Z",
-        "owner"=>
-          {"url"=>"https://api.github.com/users/guilhermeportoes",
-          "login"=>"guilhermeportoes",
-          "gravatar_id"=>"ba75dfc160b255796e769759ef482960",
-          "id"=>903845,
-          "avatar_url"=>
-            "https://secure.gravatar.com/avatar/ba75dfc160b255796e769759ef482960?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"},
-        "name"=>"janelas",
-        "has_issues?"=>true,
-        "id"=>2020355,
-        "html_url"=>"https://github.com/guilhermeportoes/janelas",
-        "description"=>"Uma merda que assolará a humanidade.",
-      }
+    def get_hello_world_repo
+      {"has_downloads?"=>true,
+      "homepage"=>"",
+      "svn_url"=>"https://github.com/octocat/hello-world",
+      "has_issues?"=>true,
+      "updated_at"=>"2012-04-02T14:59:26Z",
+      "url"=>"https://api.github.com/repos/octocat/hello-world",
+      "language"=>nil,
+      "fork?"=>false,
+      "clone_url"=>"https://github.com/octocat/hello-world.git",
+      "ssh_url"=>"git@github.com:octocat/hello-world.git",
+      "has_wiki?"=>true,
+      "git_url"=>"git://github.com/octocat/hello-world.git",
+      "size"=>96,
+      "private?"=>false,
+      "created_at"=>"2011-01-26T19:01:12Z",
+      "html_url"=>"https://github.com/octocat/hello-world",
+      "owner"=>
+        {"login"=>"octocat",
+        "url"=>"https://api.github.com/users/octocat",
+        "gravatar_id"=>"7ad39074b0584bc555d0417ae3e7d974",
+        "id"=>583231,
+        "avatar_url"=>
+          "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"},
+      "name"=>"hello-world",
+      "open_issues"=>1,
+      "mirror_url"=>nil,
+      "description"=>"This your first repo!",
+      "id"=>1296269,
+      "watchers"=>2,
+      "pushed_at"=>"2012-03-06T23:06:51Z"}
     end
 
     it 'should not respond to github attributes when there are no results' do
@@ -58,34 +57,34 @@ describe Repo do
     end
 
     it 'should returns a list of repository collaborators' do
-      repo = Repo.find('janelas', 'guilhermeportoes')
-      repo.collaborators[0].login.should == 'guilhermeportoes'
+      repo = Repo.find('hello-world', 'octocat')
+      repo.collaborators[0].login.should == 'octocat'
     end
 
     it 'should returns user object if the user is a repository collaborator' do
-      repo = Repo.find('janelas', 'guilhermeportoes')
-      collaborator = repo.collaborator('guilhermeportoes')
-      collaborator.login.should == 'guilhermeportoes'
+      repo = Repo.find('hello-world', 'octocat')
+      collaborator = repo.collaborator('octocat')
+      collaborator.login.should == 'octocat'
     end
 
     it 'if repo collaborators was already called, repo collaborator should search in @collaborators' do
-      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo = Repo.find('hello-world', 'octocat')
       repo.collaborators
-      collaborator = repo.collaborator('guilhermeportoes')
-      collaborator.login.should == 'guilhermeportoes'
+      collaborator = repo.collaborator('octocat')
+      collaborator.login.should == 'octocat'
     end
 
     it 'forks should return a list of repos objects' do
-      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo = Repo.find('hello-world', 'octocat')
       repo_fork = repo.forks[0]
       repo_fork.fork?.should == true
-      repo_fork.owner['login'].should == 'firetest'
+      repo_fork.owner['login'].should == 'bernardofire'
     end
 
     it 'should return a list of issues objects' do
-      repo = Repo.find('janelas', 'guilhermeportoes')
+      repo = Repo.find('hello-world', 'octocat')
       issue = repo.issues[0]
-      issue.title.should == 'this is a issue'
+      issue.title.should == 'just for test'
     end
   end
 end
