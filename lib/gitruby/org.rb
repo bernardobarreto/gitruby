@@ -5,9 +5,9 @@ require File.dirname(__FILE__) + '/user'
 class Org
   BASE_URL = 'https://api.github.com/'
 
-  def initialize(params, name=nil)
-    if name and params.is_a? String or params.is_a? Symbol
-      params = HTTParty.get "#{BASE_URL}orgs/#{name}"
+  def initialize(params)
+    if params.is_a? String or params.is_a? Symbol
+      params = HTTParty.get "#{BASE_URL}orgs/#{params}"
     end
     params.each do |attr, value|
       if !!value == value
