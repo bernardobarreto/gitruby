@@ -7,21 +7,25 @@ class Org
 
   def initialize(params)
     if params.is_a? String or params.is_a? Symbol
-      params = HTTParty.get "#{BASE_URL}orgs/#{params}"
+      @login = params
+      params = HTTParty.get "#{BASE_URL}users/#{@login}"
     end
+    load_lazing_attrs(params)
+  end
+
+  def load_lazing_attrs(params=nil)
     params.each do |attr, value|
-      if !!value == value
-        self.singleton_class.send(:attr_writer, attr)
-        self.singleton_class.send(:define_method, "#{attr}?") do
-          instance_variable_get("@#{attr}")
+      unless ['public_repos'].include? attr
+        if !!value == value
+          self.singleton_class.send(:attr_writer, attr)
+          self.singleton_class.send(:define_method, "#{attr}?") do
+            instance_variable_get("@#{attr}")
+          end
+        else
+          self.singleton_class.send(:attr_accessor, attr)
         end
-      else
-        self.singleton_class.send(:attr_accessor, attr)
+        send("#{attr}=", value)
       end
-      send("#{attr}=", value)
-    end
-    begin
-      self.singleton_class.send(:remove_method, :public_repos); rescue
     end
   end
 
@@ -43,5 +47,14 @@ class Org
       @repos = params.map { |repo| Repo.new(repo) }
     end
     @repos
+  end
+
+  def method_missing(method, *args)
+    params = HTTParty.get "#{BASE_URL}orgs/#{@login}"
+    if params.has_key? method.to_s
+      load_lazing_attrs(params)
+    else
+      super
+    end
   end
 end

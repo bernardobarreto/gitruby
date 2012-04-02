@@ -54,5 +54,13 @@ describe Org do
       org = Org.find('cobrateam')
       org.members[0].login.should == 'octocat'
     end
+
+    it 'some methods should be lazy' do
+      user = User.find('octocat')
+      org = user.orgs[0]
+      org.should_not respond_to :location
+      org.location
+      org.should respond_to :location
+    end
   end
 end

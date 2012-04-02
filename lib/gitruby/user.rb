@@ -9,7 +9,7 @@ class User
       @login = params
       params = HTTParty.get "#{BASE_URL}users/#{@login}"
     end
-      load_lazing_attrs(params)
+    load_lazing_attrs(params)
   end
 
   def load_lazing_attrs(params=nil)
