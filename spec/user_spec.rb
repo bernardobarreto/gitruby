@@ -67,6 +67,14 @@ describe User do
       following = user.following[0]
       following.login.should == 'bernardofire'
     end
+
+    it 'some methods should be lazy' do
+      user = User.find('octocat')
+      following = user.following[0]
+      following.should_not respond_to :company
+      following.company  # lazy method, only exists after you called it
+      following.should respond_to :company
+    end
   end
 end
 

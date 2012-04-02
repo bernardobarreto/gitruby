@@ -6,9 +6,13 @@ class User
 
   def initialize(params)
     if params.is_a? String or params.is_a? Symbol
-      params = HTTParty.get "#{BASE_URL}users/#{params}"
       @login = params
+      params = HTTParty.get "#{BASE_URL}users/#{@login}"
     end
+      load_lazing_attrs(params)
+  end
+
+  def load_lazing_attrs(params=nil)
     params.each do |attr, value|
       if not ['followers', 'following', 'public_repos'].include? attr
         if !!value == value
@@ -70,5 +74,14 @@ class User
       end
     end
     return @following
+  end
+
+  def method_missing(method, *args)
+    params = HTTParty.get "#{BASE_URL}users/#{@login}"
+    if params.has_key? method.to_s
+      load_lazing_attrs(params)
+    else
+      super
+    end
   end
 end

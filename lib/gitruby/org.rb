@@ -34,8 +34,7 @@ class Org
       params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
       @members = []
       params.each do |member|
-        # TODO: This cause to many requests, better solution ?
-        @members << User.new(member['login'])
+        @members << User.new(member)
       end
     end
     return @members

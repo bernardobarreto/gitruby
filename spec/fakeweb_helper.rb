@@ -108,6 +108,31 @@ module FakeWebHelper
                         }]')
 
   ################################## Fake for User ###############################
+
+  FakeWeb.register_uri(:get, 'https://api.github.com/users/bernardofire',
+                       :content_type => 'text/json',
+                       :body => '{
+                          "following": 79,
+                          "type": "User",
+                          "login": "bernardofire",
+                          "public_gists": 4,
+                          "blog": "bernardofire.blogspot.com",
+                          "location": "RJ",
+                          "url": "https://api.github.com/users/bernardofire",
+                          "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+                          "public_repos": 31,
+                          "company": "NSI",
+                          "hireable": true,
+                          "created_at": "2011-06-01T23:14:57Z",
+                          "email": "bernardo.fire@gmail.com",
+                          "bio": "Working at NSI (nsi.iff.edu.br) research group",
+                          "html_url": "https://github.com/bernardofire",
+                          "name": "Bernardo Barreto",
+                          "gravatar_id": "82b341477c74888442fe70db563dac26",
+                          "followers": 35,
+                          "id": 824254
+                        }')
+
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat',
                        :content_type => 'text/json',
                        :body => '{
