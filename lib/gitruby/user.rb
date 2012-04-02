@@ -14,7 +14,7 @@ class User
 
   def load_lazing_attrs(params=nil)
     params.each do |attr, value|
-      if not ['followers', 'following', 'public_repos'].include? attr
+      unless ['followers', 'following', 'public_repos'].include? attr
         if !!value == value
           self.singleton_class.send(:attr_writer, attr)
           self.singleton_class.send(:define_method, "#{attr}?") do
@@ -33,47 +33,35 @@ class User
   end
 
   def orgs
-    if not @orgs
+    unless @orgs
       params = HTTParty.get "#{BASE_URL}users/#{@login}/orgs"
-      @orgs = []
-      params.each do |org|
-        @orgs << Org.new(org)
-      end
+      @orgs = params.map { |org| Org.new(org) }
     end
-    return @orgs
+    @orgs
   end
 
   def public_repos
-    if not @repos
+    unless @repos
       params = HTTParty.get "#{BASE_URL}users/#{@login}/repos"
-      @repos = []
-      params.each do |repo|
-        @repos << Repo.new(repo)
-      end
+      @repos = params.map { |org| Org.new(org) }
     end
-    return @repos
+    @repos
   end
 
   def followers
-    if not @followers
+    unless @followers
       params = HTTParty.get "#{BASE_URL}users/#{@login}/followers"
-      @followers = []
-      params.each do |user|
-        @followers << User.new(user)
-      end
+      @followers = params.map { |user| User.new(user) }
     end
-    return @followers
+    @followers
   end
 
   def following
-    if not @following
+    unless @following
       params = HTTParty.get "#{BASE_URL}users/#{@login}/following"
-      @following = []
-      params.each do |user|
-        @following << User.new(user)
-      end
+      @following = params.map { |user| User.new(user) }
     end
-    return @following
+    @following
   end
 
   def method_missing(method, *args)

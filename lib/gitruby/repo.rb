@@ -6,12 +6,12 @@ require File.dirname(__FILE__) + '/issue'
 class Repo
   BASE_URL = 'https://api.github.com/'
 
-  def initialize(params, owner_login=nil)
+  def initialize(params, owner_login = nil)
     if owner_login and params.is_a? String or params.is_a? Symbol
       params = HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{params}"
     end
     params.each do |attr, value|
-      if not ['forks'].include? attr
+      unless attr == 'forks'
         if !!value == value
           self.singleton_class.send(:attr_writer, attr)
           self.singleton_class.send(:define_method, "#{attr}?") do
@@ -30,48 +30,35 @@ class Repo
   end
 
   def forks
-    if not @forks
+    unless @forks
       params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks"
-      @forks = []
-      params.each do |fork|
-        @forks << Repo.new(fork)
-      end
+      @forks = params.map { |fork| Repo.new(fork) }
     end
-    return @forks
+    @forks
   end
 
   def collaborators
-    if not @collaborators
+    unless @collaborators
       params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/collaborators"
-      @collaborators = []
-      params.each do |collaborator|
-        # TODO: This cause to many requests, better solution ?
-        @collaborators << User.find(collaborator['login'])
-      end
+      # TODO: This cause to many requests, better solution?
+      @collaborators = params.map { |user| User.find(user['login']) }
     end
-    return @collaborators
+    @collaborators
   end
 
   def collaborator(login)
     if @collaborators
-      @collaborators.each do |user|
-        if user.login == login
-          return user
-        end
-      end
+      @collaborators.find { |user| user.login == login }
     else
-      return User.find(login)
+      User.find(login)
     end
   end
 
   def issues
-    if not @issues
+    unless @issues
       params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
-      @issues = []
-      params.each do |issue|
-        @issues << Issue.new(issue)
-      end
+      @issues = params.map { |issue| Issue.new(issue) }
     end
-    return @issues
+    @issues
   end
 end

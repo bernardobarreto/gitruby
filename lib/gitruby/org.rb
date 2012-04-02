@@ -30,24 +30,18 @@ class Org
   end
 
   def members
-    if not @members
+    unless @members
       params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
-      @members = []
-      params.each do |member|
-        @members << User.new(member)
-      end
+      @members = params.map { |member| User.find(member['login']) }
     end
-    return @members
+    @members
   end
 
   def public_repos
-    if not @repos
+    unless @repos
       params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
-      @repos = []
-      params.each do |repo|
-        @repos << Repo.new(repo)
-      end
+      @repos = params.map { |repo| Repo.new(repo) }
     end
-    return @repos
+    @repos
   end
 end
