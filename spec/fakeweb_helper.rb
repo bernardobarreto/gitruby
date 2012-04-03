@@ -155,12 +155,6 @@ module FakeWebHelper
                           "gravatar_id": "7ad39074b0584bc555d0417ae3e7d974"
                         }')
 
-  FakeWeb.register_uri(:get, 'https://api.github.com/users/',
-                       :content_type => 'text/json',
-                       :body => '{
-                          "message": "Not Found"
-                         }')
-
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat/repos',
                        :content_type => 'text/json',
                        :body => '[
