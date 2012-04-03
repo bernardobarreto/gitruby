@@ -38,65 +38,64 @@ module FakeWebHelper
                         }')
 
   ################################## Fake for Organization ###############################
-  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/cobrateam',
+  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github',
                        :content_type => 'text/json',
                        :body => '{
-                          "following": 0,
+                          "created_at": "2008-05-11T04:37:31Z",
                           "type": "Organization",
-                          "login": "cobrateam",
-                          "public_gists": 0,
-                          "public_repos": 1,
-                          "html_url": "https://github.com/cobrateam",
-                          "location": "Rio de Janeiro",
-                          "url": "https://api.github.com/orgs/cobrateam",
+                          "location": "San Francisco, CA",
+                          "public_repos": 2,
+                          "html_url": "https://github.com/github",
+                          "url": "https://api.github.com/orgs/github",
+                          "public_gists": 1,
                           "company": null,
-                          "avatar_url": "https://secure.gravatar.com/avatar/1748a027361ab3e3a7f6515ac0319271?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
-                          "created_at": "2010-09-17T04:12:13Z",
-                          "email": null,
-                          "name": "cobra team",
-                          "followers": 8,
-                          "blog": "http://cobrateam.info/",
-                          "id": 403905
+                          "email": "support@github.com",
+                          "avatar_url": "https://secure.gravatar.com/avatar/61024896f291303615bcd4f7a0dcfb74?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
+                          "followers": 2,
+                          "following": 0,
+                          "name": "GitHub",
+                          "blog": "https://github.com/about",
+                          "id": 9919,
+                          "login": "github"
                         }')
 
-  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/cobrateam/repos',
+  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github/repos',
                        :content_type => 'text/json',
-                       :body => '[
-                        {
-                          "has_downloads": true,
-                          "homepage": "http://splinter.cobrateam.info/",
-                          "svn_url": "https://github.com/cobrateam/splinter",
-                          "has_issues": true,
-                          "updated_at": "2012-04-02T00:10:50Z",
-                          "forks": 41,
-                          "url": "https://api.github.com/repos/cobrateam/splinter",
-                          "language": "Python",
-                          "fork": false,
-                          "clone_url": "https://github.com/cobrateam/splinter.git",
-                          "ssh_url": "git@github.com:cobrateam/splinter.git",
-                          "has_wiki": true,
-                          "size": 364,
-                          "git_url": "git://github.com/cobrateam/splinter.git",
-                          "private": false,
-                          "created_at": "2010-09-18T20:59:15Z",
-                          "html_url": "https://github.com/cobrateam/splinter",
+                       :body => '[{
+                          "has_issues": false,
+                          "created_at": "2010-08-24T19:16:26Z",
+                          "forks": 1,
+                          "language": "Ruby",
+                          "clone_url": "https://github.com/github/project.git",
                           "owner": {
-                            "login": "cobrateam",
-                            "url": "https://api.github.com/users/cobrateam",
-                            "gravatar_id": "1748a027361ab3e3a7f6515ac0319271",
-                            "avatar_url": "https://secure.gravatar.com/avatar/1748a027361ab3e3a7f6515ac0319271?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
-                            "id": 403905
+                            "url": "https://api.github.com/users/github",
+                            "avatar_url": "https://secure.gravatar.com/avatar/61024896f291303615bcd4f7a0dcfb74?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
+                            "gravatar_id": "61024896f291303615bcd4f7a0dcfb74",
+                            "id": 9919,
+                            "login": "github"
                           },
-                          "name": "splinter",
-                          "open_issues": 30,
+                          "html_url": "https://github.com/github/project",
+                          "url": "https://api.github.com/repos/github/project",
                           "mirror_url": null,
-                          "description": "splinter - python test framework for web applications ",
-                          "id": 921367,
-                          "watchers": 234,
-                          "pushed_at": "2012-03-31T16:30:57Z"
+                          "has_wiki": true,
+                          "ssh_url": "git@github.com:github/project.git",
+                          "open_issues": 0,
+                          "description": "test project",
+                          "watchers": 2,
+                          "size": 296,
+                          "fork": true,
+                          "git_url": "git://github.com/github/project.git",
+                          "pushed_at": "2010-08-24T19:41:38Z",
+                          "updated_at": "2011-11-18T01:46:27Z",
+                          "name": "project",
+                          "svn_url": "https://github.com/github/project",
+                          "private": false,
+                          "id": 859835,
+                          "has_downloads": true,
+                          "homepage": ""
                         }]')
 
-  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/cobrateam/members',
+  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github/members',
                        :content_type => 'text/json',
                        :body => '[
                        {
@@ -108,40 +107,39 @@ module FakeWebHelper
                         }]')
 
   ################################## Fake for User ###############################
-
-  FakeWeb.register_uri(:get, 'https://api.github.com/users/bernardofire',
+  FakeWeb.register_uri(:get, 'https://api.github.com/users/octopus',
                        :content_type => 'text/json',
                        :body => '{
-                          "following": 79,
+                          "following": 1,
                           "type": "User",
-                          "login": "bernardofire",
-                          "public_gists": 4,
-                          "blog": "bernardofire.blogspot.com",
+                          "login": "octopus",
+                          "public_gists": 2,
+                          "blog": "octopus.com",
                           "location": "RJ",
-                          "url": "https://api.github.com/users/bernardofire",
+                          "url": "https://api.github.com/users/octopus",
                           "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-                          "public_repos": 31,
-                          "company": "NSI",
+                          "public_repos": 1,
+                          "company": "github",
                           "hireable": true,
                           "created_at": "2011-06-01T23:14:57Z",
-                          "email": "bernardo.fire@gmail.com",
-                          "bio": "Working at NSI (nsi.iff.edu.br) research group",
-                          "html_url": "https://github.com/bernardofire",
-                          "name": "Bernardo Barreto",
+                          "email": "octopus@github.com",
+                          "bio": "developer",
+                          "html_url": "https://github.com/octopus",
+                          "name": "octopus",
                           "gravatar_id": "82b341477c74888442fe70db563dac26",
-                          "followers": 35,
+                          "followers": 1,
                           "id": 824254
                         }')
 
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat',
                        :content_type => 'text/json',
                        :body => '{
-                          "followers": 145,
-                          "following": 0,
+                          "followers": 1,
+                          "following": 1,
                           "type": "User",
                           "login": "octocat",
                           "avatar_url": "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-                          "public_repos": 3,
+                          "public_repos": 1,
                           "hireable": false,
                           "blog": "http://www.github.com/blog",
                           "location": "San Francisco",
@@ -168,7 +166,7 @@ module FakeWebHelper
                        :body => '[
                         {
                           "open_issues": 2,
-                          "watchers": 875,
+                          "watchers": 1,
                           "pushed_at": "2012-03-06T23:06:51Z",
                           "homepage": "",
                           "updated_at": "2012-04-01T17:02:06Z",
@@ -179,7 +177,7 @@ module FakeWebHelper
                           "language": null,
                           "fork": false,
                           "ssh_url": "git@github.com:octocat/hello-world.git",
-                          "forks": 130,
+                          "forks": 1,
                           "html_url": "https://github.com/octocat/hello-world",
                           "size": 168,
                           "clone_url": "https://github.com/octocat/hello-world.git",
@@ -204,8 +202,8 @@ module FakeWebHelper
                        :content_type => 'text/json',
                        :body => '[{
                           "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-                          "login": "bernardofire",
-                          "url": "https://api.github.com/users/bernardofire",
+                          "login": "octopus",
+                          "url": "https://api.github.com/users/octopus",
                           "gravatar_id": "82b341477c74888442fe70db563dac26",
                           "id": 824254
                         }]')
@@ -214,8 +212,8 @@ module FakeWebHelper
                        :content_type => 'text/json',
                        :body => '[{
                           "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-                          "login": "bernardofire",
-                          "url": "https://api.github.com/users/bernardofire",
+                          "login": "octopus",
+                          "url": "https://api.github.com/users/octopus",
                           "gravatar_id": "82b341477c74888442fe70db563dac26",
                           "id": 824254
                         }]')
@@ -223,10 +221,10 @@ module FakeWebHelper
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat/orgs',
                        :content_type => 'text/json',
                        :body => '[{
-                          "avatar_url": "https://secure.gravatar.com/avatar/1748a027361ab3e3a7f6515ac0319271?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
-                          "login": "cobrateam",
-                          "url": "https://api.github.com/orgs/cobrateam",
-                          "id": 403905
+                          "avatar_url": "https://secure.gravatar.com/avatar/61024896f291303615bcd4f7a0dcfb74?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
+                          "login": "github",
+                          "url": "https://api.github.com/orgs/github",
+                          "id": 9919
                         }]')
 
   ################################## Fake for Repository ###############################
@@ -238,7 +236,7 @@ module FakeWebHelper
                           "svn_url": "https://github.com/octocat/hello-world",
                           "has_issues": true,
                           "updated_at": "2012-04-02T14:59:26Z",
-                          "forks": 2,
+                          "forks": 1,
                           "url": "https://api.github.com/repos/octocat/hello-world",
                           "language": null,
                           "fork": false,
@@ -305,28 +303,28 @@ module FakeWebHelper
                        :body => '[{
                           "has_downloads": true,
                           "homepage": "",
-                          "svn_url": "https://github.com/bernardofire/hello-world",
+                          "svn_url": "https://github.com/octopus/hello-world",
                           "has_issues": false,
                           "updated_at": "2012-04-02T17:47:49Z",
                           "forks": 0,
-                          "html_url": "https://github.com/bernardofire/hello-world",
-                          "url": "https://api.github.com/repos/bernardofire/hello-world",
+                          "html_url": "https://github.com/octopus/hello-world",
+                          "url": "https://api.github.com/repos/octopus/hello-world",
                           "language": null,
                           "fork": true,
-                          "clone_url": "https://github.com/bernardofire/hello-world.git",
-                          "ssh_url": "git@github.com:bernardofire/hello-world.git",
-                          "git_url": "git://github.com/bernardofire/hello-world.git",
+                          "clone_url": "https://github.com/octopus/hello-world.git",
+                          "ssh_url": "git@github.com:octopus/hello-world.git",
+                          "git_url": "git://github.com/octopus/hello-world.git",
                           "has_wiki": true,
                           "mirror_url": null,
                           "size": 168,
                           "private": false,
                           "created_at": "2012-04-02T17:47:49Z",
                           "owner": {
-                            "login": "bernardofire",
-                            "url": "https://api.github.com/users/bernardofire",
-                            "gravatar_id": "a0d10160bff9ca902fcc6da198b01c0e",
-                            "id": 1600213,
-                            "avatar_url": "https://secure.gravatar.com/avatar/a0d10160bff9ca902fcc6da198b01c0e?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+                            "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+                            "login": "octopus",
+                            "url": "https://api.github.com/users/octopus",
+                            "gravatar_id": "82b341477c74888442fe70db563dac26",
+                            "id": 824254
                           },
                           "name": "hello-world",
                           "open_issues": 0,

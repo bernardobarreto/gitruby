@@ -53,19 +53,19 @@ describe User do
 
     it "should be able to return all user's orgs" do
       user = User.find('octocat')
-      user.orgs[0].login.should == 'cobrateam'
+      user.orgs[0].login.should == 'github'
     end
 
     it "should return a list of followers" do
       user = User.find('octocat')
       follower = user.followers[0]
-      follower.login.should == 'bernardofire'
+      follower.login.should == 'octopus'
     end
 
     it "should return a list of who I'm following" do
       user = User.find('octocat')
       following = user.following[0]
-      following.login.should == 'bernardofire'
+      following.login.should == 'octopus'
     end
 
     it 'some methods should be lazy' do

@@ -78,7 +78,7 @@ describe Repo do
       repo = Repo.find('hello-world', 'octocat')
       repo_fork = repo.forks[0]
       repo_fork.fork?.should == true
-      repo_fork.owner['login'].should == 'bernardofire'
+      repo_fork.owner['login'].should == 'octopus'
     end
 
     it 'should return a list of issues objects' do
