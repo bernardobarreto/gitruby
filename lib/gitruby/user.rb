@@ -43,7 +43,7 @@ class User
   def public_repos
     unless @repos
       params = HTTParty.get "#{BASE_URL}users/#{@login}/repos"
-      @repos = params.map { |org| Org.new(org) }
+      @repos = params.map { |repo| Repo.new(repo) }
     end
     @repos
   end
