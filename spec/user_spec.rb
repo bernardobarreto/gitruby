@@ -74,6 +74,12 @@ describe User do
       followers.login.should == 'octodog'
     end
 
+    it "following should support api url options" do
+      user = User.find('octocat')
+      following = user.following(page: 2)[0]
+      following.login.should == 'octodog'
+    end
+
     it 'some methods should be lazy' do
       user = User.find('octocat')
       following = user.following[0]

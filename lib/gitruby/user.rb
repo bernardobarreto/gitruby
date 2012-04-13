@@ -54,12 +54,10 @@ class User
     return params.map { |user| User.new(user) }
   end
 
-  def following
-    unless @following
-      params = HTTParty.get "#{BASE_URL}users/#{@login}/following"
-      @following = params.map { |user| User.new(user) }
-    end
-    @following
+  def following(options=nil)
+    options = format_options(options) || ''
+    params = HTTParty.get "#{BASE_URL}users/#{@login}/following#{options}"
+    return params.map { |user| User.new(user) }
   end
 
   def format_options(options=nil)

@@ -222,6 +222,16 @@ module FakeWebHelper
                           "id": 824254
                         }]')
 
+  FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat/following?page=2',
+                       :content_type => 'text/json',
+                       :body => '[{
+                          "avatar_url": "https://secure.gravatar.com/avatar/ba75dfc160b255796e769759ef482960?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+                          "login": "octodog",
+                          "url": "https://api.github.com/users/octodog",
+                          "gravatar_id": "d0617cc5f99782ba67bcfc73eedf7519",
+                          "id": 492542
+                        }]')
+
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat/orgs',
                        :content_type => 'text/json',
                        :body => '[{
