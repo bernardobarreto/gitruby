@@ -48,12 +48,10 @@ class User
     @repos
   end
 
-  def followers
-    unless @followers
-      params = HTTParty.get "#{BASE_URL}users/#{@login}/followers"
-      @followers = params.map { |user| User.new(user) }
-    end
-    @followers
+  def followers(options=nil)
+    options = format_options(options) || ''
+    params = HTTParty.get "#{BASE_URL}users/#{@login}/followers#{options}"
+    return params.map { |user| User.new(user) }
   end
 
   def following
@@ -62,6 +60,11 @@ class User
       @following = params.map { |user| User.new(user) }
     end
     @following
+  end
+
+  def format_options(options=nil)
+    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
+    return options
   end
 
   def method_missing(method, *args)
