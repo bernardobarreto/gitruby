@@ -49,20 +49,20 @@ class User
   end
 
   def followers(options=nil)
-    options = format_options(options) || ''
+    options = format_options(options)
     params = HTTParty.get "#{BASE_URL}users/#{@login}/followers#{options}"
     return params.map { |user| User.new(user) }
   end
 
   def following(options=nil)
-    options = format_options(options) || ''
+    options = format_options(options)
     params = HTTParty.get "#{BASE_URL}users/#{@login}/following#{options}"
     return params.map { |user| User.new(user) }
   end
 
   def format_options(options=nil)
     options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
-    return options
+    return options || ''
   end
 
   def method_missing(method, *args)
