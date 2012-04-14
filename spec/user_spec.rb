@@ -80,6 +80,12 @@ describe User do
       following.login.should == 'octodog'
     end
 
+    it "user public repos should support api url options" do
+      user = User.find('octocat')
+      repo = user.public_repos(page: 2)[0]
+      repo.name.should == 'foobar'
+    end
+
     it 'some methods should be lazy' do
       user = User.find('octocat')
       following = user.following[0]

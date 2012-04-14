@@ -40,12 +40,10 @@ class User
     @orgs
   end
 
-  def public_repos
-    unless @repos
-      params = HTTParty.get "#{BASE_URL}users/#{@login}/repos"
-      @repos = params.map { |repo| Repo.new(repo) }
-    end
-    @repos
+  def public_repos(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}users/#{@login}/repos#{options}"
+    return params.map { |repo| Repo.new(repo) }
   end
 
   def followers(options=nil)
