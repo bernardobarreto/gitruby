@@ -56,6 +56,8 @@ class User
     return params.map { |user| User.new(user) }
   end
 
+  private
+
   def format_options(options=nil)
     options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
     return options || ''
