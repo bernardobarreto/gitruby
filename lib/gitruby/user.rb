@@ -32,12 +32,10 @@ class User
     new(HTTParty.get "#{BASE_URL}users/#{username}")
   end
 
-  def orgs
-    unless @orgs
-      params = HTTParty.get "#{BASE_URL}users/#{@login}/orgs"
-      @orgs = params.map { |org| Org.new(org) }
-    end
-    @orgs
+  def orgs(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}users/#{@login}/orgs#{options}"
+    @orgs = params.map { |org| Org.new(org) }
   end
 
   def public_repos(options=nil)

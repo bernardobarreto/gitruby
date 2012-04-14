@@ -278,6 +278,15 @@ module FakeWebHelper
                           "id": 9919
                         }]')
 
+
+  FakeWeb.register_uri(:get, 'https://api.github.com/users/octocat/orgs?page=2',
+                       :content_type => 'text/json',
+                       :body => '[{
+                          "avatar_url": "https://secure.gravatar.com/avatar/1748a027361ab3e3a7f6515ac0319271?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
+                          "login": "linux",
+                          "url": "https://api.github.com/orgs/linux",
+                          "id": 403905
+                        }]')
   ################################## Fake for Repository ###############################
   FakeWeb.register_uri(:get, 'https://api.github.com/repos/octocat/hello-world',
                        :content_type => 'text/json',

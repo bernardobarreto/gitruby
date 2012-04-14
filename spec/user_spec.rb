@@ -86,6 +86,12 @@ describe User do
       repo.name.should == 'foobar'
     end
 
+    it "user orgs should support api url options" do
+      user = User.find('octocat')
+      org = user.orgs(page: 2)[0]
+      org.login.should == 'linux'
+    end
+
     it 'some methods should be lazy' do
       user = User.find('octocat')
       following = user.following[0]
