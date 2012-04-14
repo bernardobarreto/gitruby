@@ -32,24 +32,17 @@ class Repo
   def forks(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks#{options}"
-    @forks = params.map { |fork| Repo.new(fork) }
+    return params.map { |fork| Repo.new(fork) }
   end
 
-  def collaborators
-    unless @collaborators
-      params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/collaborators"
-      # TODO: This cause to many requests, better solution?
-      @collaborators = params.map { |user| User.find(user['login']) }
-    end
-    @collaborators
+  def collaborators(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/collaborators#{options}"
+    return params.map { |user| User.new(user) }
   end
 
   def collaborator(login)
-    if @collaborators
-      @collaborators.find { |user| user.login == login }
-    else
-      User.find(login)
-    end
+    return User.find(login)
   end
 
   def issues
