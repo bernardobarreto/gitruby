@@ -29,12 +29,10 @@ class Repo
     new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
   end
 
-  def forks
-    unless @forks
-      params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks"
-      @forks = params.map { |fork| Repo.new(fork) }
-    end
-    @forks
+  def forks(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks#{options}"
+    @forks = params.map { |fork| Repo.new(fork) }
   end
 
   def collaborators
@@ -60,5 +58,12 @@ class Repo
       @issues = params.map { |issue| Issue.new(issue) }
     end
     @issues
+  end
+
+  private
+
+  def format_options(options=nil)
+    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
+    return options || ''
   end
 end

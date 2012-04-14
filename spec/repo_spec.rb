@@ -81,6 +81,13 @@ describe Repo do
       repo_fork.owner['login'].should == 'octopus'
     end
 
+    it 'forks should accept api url options' do
+      repo = Repo.find('hello-world', 'octocat')
+      repo_fork = repo.forks(page: 2)[0]
+      repo_fork.fork?.should == true
+      repo_fork.owner['login'].should == 'octodog'
+    end
+
     it 'should return a list of issues objects' do
       repo = Repo.find('hello-world', 'octocat')
       issue = repo.issues[0]

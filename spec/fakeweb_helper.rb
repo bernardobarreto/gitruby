@@ -394,6 +394,42 @@ module FakeWebHelper
                           "pushed_at": "2012-03-06T23:06:51Z"
                         }]')
 
+  FakeWeb.register_uri(:get, 'https://api.github.com/repos/octocat/hello-world/forks?page=2',
+                       :content_type => 'text/json',
+                       :body => '[{
+                          "has_downloads": true,
+                          "homepage": "",
+                          "svn_url": "https://github.com/octodog/hello-world",
+                          "has_issues": false,
+                          "updated_at": "2012-04-02T17:47:49Z",
+                          "forks": 0,
+                          "html_url": "https://github.com/octodog/hello-world",
+                          "url": "https://api.github.com/repos/octodog/hello-world",
+                          "language": null,
+                          "fork": true,
+                          "clone_url": "https://github.com/octodog/hello-world.git",
+                          "ssh_url": "git@github.com:octodog/hello-world.git",
+                          "git_url": "git://github.com/octodog/hello-world.git",
+                          "has_wiki": true,
+                          "mirror_url": null,
+                          "size": 168,
+                          "private": false,
+                          "created_at": "2012-04-02T17:47:49Z",
+                          "owner": {
+                            "avatar_url": "https://secure.gravatar.com/avatar/ba75dfc160b255796e769759ef482960?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+                            "login": "octodog",
+                            "url": "https://api.github.com/users/octodog",
+                            "gravatar_id": "d0617cc5f99782ba67bcfc73eedf7519",
+                            "id": 492542
+                          },
+                          "name": "hello-world",
+                          "open_issues": 0,
+                          "description": "This your first repo!",
+                          "id": 3906488,
+                          "watchers": 1,
+                          "pushed_at": "2012-03-06T23:06:51Z"
+                        }]')
+
   FakeWeb.register_uri(:get, 'https://api.github.com/repos/octocat/hello-world/collaborators',
                        :content_type => 'text/json',
                        :body => '[{
