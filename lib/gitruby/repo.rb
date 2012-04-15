@@ -46,11 +46,8 @@ class Repo
   end
 
   def issues
-    unless @issues
-      params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
-      @issues = params.map { |issue| Issue.new(issue) }
-    end
-    @issues
+    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
+    @issues = params.map { |issue| Issue.new(issue) }
   end
 
   private
