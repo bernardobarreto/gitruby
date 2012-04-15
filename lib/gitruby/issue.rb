@@ -4,10 +4,7 @@ require 'httparty'
 class Issue
   BASE_URL = 'https://api.github.com/'
 
-  def initialize(params, owner_login=nil, issue_number=nil)
-    if owner_login and issue_number and params.is_a? String or params.is_a? Symbol
-      params = HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}/issues/#{issue_number}"
-    end
+  def initialize(params)
     params.each do |attr, value|
       if !!value == value
         self.singleton_class.send(:attr_writer, attr)
