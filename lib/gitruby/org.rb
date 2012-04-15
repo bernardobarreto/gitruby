@@ -34,19 +34,13 @@ class Org
   end
 
   def members
-    unless @members
-      params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
-      @members = params.map { |member| User.find(member['login']) }
-    end
-    @members
+    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
+    return params.map { |member| User.find(member['login']) }
   end
 
   def public_repos
-    unless @repos
-      params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
-      @repos = params.map { |repo| Repo.new(repo) }
-    end
-    @repos
+    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
+    return params.map { |repo| Repo.new(repo) }
   end
 
   def method_missing(method, *args)
