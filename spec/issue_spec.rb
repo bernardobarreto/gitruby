@@ -5,12 +5,12 @@ include FakeWebHelper
 describe Issue do
   context "without authentication" do
     it 'should return a specific issue' do
-      issue = Issue.find('hello-world', 'octocat', 1)
+      issue = Issue.find('octocat', 'hello-world', 1)
       issue.title.should == 'just for test'
     end
 
     it "should convert the hash from api into public attributes" do
-      issue = Issue.find('hello-world', 'octocat', 1)
+      issue = Issue.find('octocat', 'hello-world', 1)
       get_hello_world_first_issue.each do |key, value|
         issue.public_send(key).should == value
       end
