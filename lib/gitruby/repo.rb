@@ -25,7 +25,7 @@ class Repo
     end
   end
 
-  def self.find(repository, owner_login)
+  def self.find(owner_login, repository)
     new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
   end
 

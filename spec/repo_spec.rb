@@ -4,13 +4,13 @@ require "spec_helper"
 describe Repo do
   context "without authentication" do
     it "should be findable by the github username/repository" do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       repo.name.should == 'hello-world'
       repo.html_url.should == 'https://github.com/octocat/hello-world'
     end
 
     it "should convert the hash from api.github to public attributes" do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       get_hello_world_repo.each do |key, value|
         repo.public_send(key).should == value
       end
@@ -57,45 +57,45 @@ describe Repo do
     end
 
     it 'should returns a list of repository collaborators' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       repo.collaborators[0].login.should == 'octocat'
     end
 
     it 'should returns user object if the user is a repository collaborator' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       collaborator = repo.collaborator('octocat')
       collaborator.login.should == 'octocat'
     end
 
     it 'if repo collaborators was already called, repo collaborator should search in @collaborators' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       repo.collaborators
       collaborator = repo.collaborator('octocat')
       collaborator.login.should == 'octocat'
     end
 
     it 'forks should return a list of repos objects' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       repo_fork = repo.forks[0]
       repo_fork.fork?.should == true
       repo_fork.owner['login'].should == 'octopus'
     end
 
     it 'forks should accept api url options' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       repo_fork = repo.forks(page: 2)[0]
       repo_fork.fork?.should == true
       repo_fork.owner['login'].should == 'octodog'
     end
 
     it 'should return a list of issues objects' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       issue = repo.issues[0]
       issue.title.should == 'just for test'
     end
 
     it 'collaborators should support api url options' do
-      repo = Repo.find('hello-world', 'octocat')
+      repo = Repo.find('octocat', 'hello-world')
       user = repo.collaborators(page: 2)[0]
       user.login.should == 'octodog'
     end
