@@ -106,6 +106,17 @@ module FakeWebHelper
                           "avatar_url": "https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
                         }]')
 
+
+  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github/members?page=2',
+                       :content_type => 'text/json',
+                       :body => '[
+                       {
+                          "avatar_url": "https://secure.gravatar.com/avatar/82b341477c74888442fe70db563dac26?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+                          "login": "octopus",
+                          "url": "https://api.github.com/users/octopus",
+                          "gravatar_id": "82b341477c74888442fe70db563dac26",
+                          "id": 824254
+                        }]')
   ################################## Fake for User ###############################
   FakeWeb.register_uri(:get, 'https://api.github.com/users/octopus',
                        :content_type => 'text/json',

@@ -33,14 +33,22 @@ class Org
     new(HTTParty.get "#{BASE_URL}orgs/#{name}")
   end
 
-  def members
-    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members"
+  def members(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members#{options}"
     return params.map { |member| User.find(member['login']) }
   end
 
   def public_repos
     params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
     return params.map { |repo| Repo.new(repo) }
+  end
+
+  private
+
+  def format_options(options=nil)
+    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
+    return options || ''
   end
 
   def method_missing(method, *args)

@@ -55,6 +55,12 @@ describe Org do
       org.members[0].login.should == 'octocat'
     end
 
+    it 'members should support url api options' do
+      org = Org.find('github')
+      member = org.members(page: 2)[0]
+      member.login.should == 'octopus'
+    end
+
     it 'some methods should be lazy' do
       user = User.find('octocat')
       org = user.orgs[0]
