@@ -95,6 +95,42 @@ module FakeWebHelper
                           "homepage": ""
                         }]')
 
+  FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github/repos?page=2',
+                       :content_type => 'text/json',
+                       :body => '[{
+                          "open_issues": 77,
+                          "svn_url": "https://github.com/github/gitignore",
+                          "pushed_at": "2012-03-19T18:52:35Z",
+                          "created_at": "2010-11-08T20:17:14Z",
+                          "description": "A collection of useful .gitignore templates",
+                          "html_url": "https://github.com/github/gitignore",
+                          "has_downloads": true,
+                          "watchers": 4748,
+                          "clone_url": "https://github.com/github/gitignore.git",
+                          "url": "https://api.github.com/repos/github/gitignore",
+                          "fork": false,
+                          "size": 224,
+                          "homepage": "",
+                          "git_url": "git://github.com/github/gitignore.git",
+                          "private": false,
+                          "has_wiki": false,
+                          "has_issues": false,
+                          "updated_at": "2012-04-16T19:00:39Z",
+                          "owner": {
+                            "avatar_url": "https://secure.gravatar.com/avatar/61024896f291303615bcd4f7a0dcfb74?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
+                            "url": "https://api.github.com/users/github",
+                            "login": "github",
+                            "gravatar_id": "61024896f291303615bcd4f7a0dcfb74",
+                            "id": 9919
+                          },
+                          "name": "gitignore",
+                          "forks": 643,
+                          "ssh_url": "git@github.com:github/gitignore.git",
+                          "id": 1062897,
+                          "mirror_url": null,
+                          "language": null
+                        }]')
+
   FakeWeb.register_uri(:get, 'https://api.github.com/orgs/github/members',
                        :content_type => 'text/json',
                        :body => '[

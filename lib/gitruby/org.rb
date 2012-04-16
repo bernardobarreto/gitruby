@@ -39,8 +39,9 @@ class Org
     return params.map { |member| User.find(member['login']) }
   end
 
-  def public_repos
-    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos"
+  def public_repos(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos#{options}"
     return params.map { |repo| Repo.new(repo) }
   end
 

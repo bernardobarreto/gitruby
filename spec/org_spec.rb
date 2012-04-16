@@ -61,6 +61,12 @@ describe Org do
       member.login.should == 'octopus'
     end
 
+    it 'public repos should support url api options' do
+      org = Org.find('github')
+      repo = org.public_repos(page: 2)[0]
+      repo.name.should == 'gitignore'
+    end
+
     it 'some methods should be lazy' do
       user = User.find('octocat')
       org = user.orgs[0]
