@@ -41,8 +41,9 @@ class Repo
     return params.map { |user| User.new(user) }
   end
 
-  def issues
-    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
+  def issues(options=nil)
+    options = format_options(options)
+    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues#{options}"
     return params.map { |issue| Issue.new(issue) }
   end
 

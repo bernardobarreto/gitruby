@@ -86,5 +86,11 @@ describe Repo do
       user = repo.collaborators(page: 2)[0]
       user.login.should == 'octodog'
     end
+
+    it 'issues should support api url options' do
+      repo = Repo.find('octocat', 'hello-world')
+      issue = repo.issues(page: 2)[0]
+      issue.title.should == 'issue page 2'
+    end
   end
 end
