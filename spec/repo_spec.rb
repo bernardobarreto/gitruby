@@ -61,19 +61,6 @@ describe Repo do
       repo.collaborators[0].login.should == 'octocat'
     end
 
-    it 'should returns user object if the user is a repository collaborator' do
-      repo = Repo.find('octocat', 'hello-world')
-      collaborator = repo.collaborator('octocat')
-      collaborator.login.should == 'octocat'
-    end
-
-    it 'if repo collaborators was already called, repo collaborator should search in @collaborators' do
-      repo = Repo.find('octocat', 'hello-world')
-      repo.collaborators
-      collaborator = repo.collaborator('octocat')
-      collaborator.login.should == 'octocat'
-    end
-
     it 'forks should return a list of repos objects' do
       repo = Repo.find('octocat', 'hello-world')
       repo_fork = repo.forks[0]

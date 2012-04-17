@@ -41,10 +41,6 @@ class Repo
     return params.map { |user| User.new(user) }
   end
 
-  def collaborator(login)
-    return User.find(login)
-  end
-
   def issues
     params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues"
     return params.map { |issue| Issue.new(issue) }
