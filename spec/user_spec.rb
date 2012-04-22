@@ -37,7 +37,7 @@ describe User do
     end
 
     it 'should not respond to github attributes when there are no results' do
-      user = User.new('')
+      user = User.new(foo: 'bar')
       user.should_not respond_to :login
       user.should_not respond_to :email
       user.should_not respond_to :company
