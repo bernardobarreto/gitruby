@@ -37,7 +37,7 @@ describe Org do
     end
 
     it 'should not respond to github attributes when there are no results' do
-      org = Org.new :foooooobar123
+      org = Org.new(foo: 'bar')
       org.should_not respond_to :login
       org.should_not respond_to :following
       org.should_not respond_to :followers

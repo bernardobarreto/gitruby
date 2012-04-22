@@ -6,10 +6,6 @@ class Org
   BASE_URL = 'https://api.github.com/'
 
   def initialize(params)
-    if params.is_a? String or params.is_a? Symbol
-      @login = params
-      params = HTTParty.get "#{BASE_URL}users/#{@login}"
-    end
     load_lazing_attrs(params)
   end
 
