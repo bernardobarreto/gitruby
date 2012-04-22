@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'httparty'
 require File.dirname(__FILE__) + '/user'
+require File.dirname(__FILE__) + '/util'
 
 class Org
   BASE_URL = 'https://api.github.com/'

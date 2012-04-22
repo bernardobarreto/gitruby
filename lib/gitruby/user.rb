@@ -1,27 +1,12 @@
 require 'httparty'
 require File.dirname(__FILE__) + '/repo'
+require File.dirname(__FILE__) + '/util'
 
 class User
-  BASE_URL = 'https://api.github.com/'
+  include Util
 
   def initialize(params)
     load_lazing_attrs(params)
-  end
-
-  def load_lazing_attrs(params=nil)
-    params.each do |attr, value|
-      unless ['followers', 'following', 'public_repos'].include? attr
-        if !!value == value
-          self.singleton_class.send(:attr_writer, attr)
-          self.singleton_class.send(:define_method, "#{attr}?") do
-            instance_variable_get("@#{attr}")
-          end
-        else
-          self.singleton_class.send(:attr_accessor, attr)
-        end
-        send("#{attr}=", value)
-      end
-    end
   end
 
   def self.find(username)
