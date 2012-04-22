@@ -50,7 +50,7 @@ describe Repo do
     end
 
     it 'should not respond to github attributes when there are no results' do
-      repo = Repo.new :foooooobar123
+      repo = Repo.new(foo: 'bar')
       repo.should_not respond_to :login
       repo.should_not respond_to :following
       repo.should_not respond_to :followers

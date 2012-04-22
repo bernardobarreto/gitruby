@@ -6,10 +6,7 @@ require File.dirname(__FILE__) + '/issue'
 class Repo
   BASE_URL = 'https://api.github.com/'
 
-  def initialize(params, owner_login = nil)
-    if owner_login and params.is_a? String or params.is_a? Symbol
-      params = HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{params}"
-    end
+  def initialize(params)
     params.each do |attr, value|
       unless attr == 'forks'
         if !!value == value
