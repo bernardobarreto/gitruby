@@ -1,7 +1,7 @@
 module Util
   BASE_URL = 'https://api.github.com/'
 
-  def load_lazing_attrs(params=nil)
+  def load_lazing_attrs(params)
     params.each do |attr, value|
       unless ['forks', 'followers', 'following', 'public_repos'].include? attr
         if !!value == value
