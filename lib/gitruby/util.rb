@@ -16,4 +16,9 @@ module Util
       end
     end
   end
+
+  def format_options(options=nil)
+    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
+    return options || ''
+  end
 end

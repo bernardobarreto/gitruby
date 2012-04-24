@@ -36,11 +36,4 @@ class Repo
   def issue(number)
     return Issue.find(@owner['login'], @name, number)
   end
-
-  private
-
-  def format_options(options=nil)
-    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
-    return options || ''
-  end
 end

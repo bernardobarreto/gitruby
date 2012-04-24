@@ -28,8 +28,6 @@ describe Org do
       "email"=>"support@github.com",
       "avatar_url"=>
         "https://secure.gravatar.com/avatar/61024896f291303615bcd4f7a0dcfb74?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png",
-      "followers"=>2,
-      "following"=>0,
       "name"=>"GitHub",
       "blog"=>"https://github.com/about",
       "id"=>9919,

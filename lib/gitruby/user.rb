@@ -37,13 +37,6 @@ class User
     return params.map { |user| User.new(user) }
   end
 
-  private
-
-  def format_options(options=nil)
-    options = '?' + options.map {|k, v| "%s=%s" % [k, v] }.join("&") if options
-    return options || ''
-  end
-
   def method_missing(method, *args)
     params = HTTParty.get "#{BASE_URL}users/#{@login}"
     if params.has_key? method.to_s
