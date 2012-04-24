@@ -81,6 +81,12 @@ describe Repo do
       issue.title.should == 'just for test'
     end
 
+    it 'should return a specific issue' do
+      repo = Repo.find('octocat', 'hello-world')
+      issue = repo.issue(1)
+      issue.title.should == 'just for test'
+    end
+
     it 'collaborators should support api url options' do
       repo = Repo.find('octocat', 'hello-world')
       user = repo.collaborators(page: 2)[0]

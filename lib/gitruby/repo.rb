@@ -33,6 +33,10 @@ class Repo
     return params.map { |issue| Issue.new(issue) }
   end
 
+  def issue(number)
+    return Issue.find(@owner['login'], @name, number)
+  end
+
   private
 
   def format_options(options=nil)
