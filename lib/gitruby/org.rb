@@ -17,13 +17,13 @@ class Org
   def members(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members#{options}"
-    return params.map { |member| User.find(member['login']) }
+    params.map { |member| User.find(member['login']) }
   end
 
   def public_repos(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos#{options}"
-    return params.map { |repo| Repo.new(repo) }
+    params.map { |repo| Repo.new(repo) }
   end
 
   def method_missing(method, *args)

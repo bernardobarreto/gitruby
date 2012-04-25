@@ -22,19 +22,19 @@ class User
   def public_repos(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}users/#{@login}/repos#{options}"
-    return params.map { |repo| Repo.new(repo) }
+    params.map { |repo| Repo.new(repo) }
   end
 
   def followers(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}users/#{@login}/followers#{options}"
-    return params.map { |user| User.new(user) }
+    params.map { |user| User.new(user) }
   end
 
   def following(options=nil)
     options = format_options(options)
     params = HTTParty.get "#{BASE_URL}users/#{@login}/following#{options}"
-    return params.map { |user| User.new(user) }
+    params.map { |user| User.new(user) }
   end
 
   def method_missing(method, *args)
