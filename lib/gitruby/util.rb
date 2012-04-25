@@ -3,7 +3,11 @@ module Util
 
   def load_lazing_attrs(params)
     params.each do |attr, value|
-      unless ['forks', 'followers', 'following', 'public_repos'].include? attr
+      methods = ['forks', 'public_repos']
+      # github api doesn't support get org's followers/following
+      methods << ['followers', 'following'] unless self.is_a? Org
+
+      unless methods.flatten.include? attr
         if !!value == value
           self.singleton_class.send(:attr_writer, attr)
           self.singleton_class.send(:define_method, "#{attr}?") do
