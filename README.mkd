@@ -3,6 +3,14 @@
 [travis]: http://travis-ci.org/bernardofire/gitruby
 
 Yet another github api wrapper in ruby
+### Tips
+You should me familiar with de github api (developer.github.com)
+
+### Conventions
+The booleans methods are automatically turned from "boolean_method" to "boolean_method?".
+
+
+## Usage
 
 ### User
 ```ruby
@@ -13,6 +21,9 @@ bernardofire = User.find('bernardofire') # returns an object with user's api att
  @login="bernardofire",
  @name="Bernardo Barreto",
  .....>
+ 
+bernardofire.id  # => 824254
+bernardofire.type  # => "User"
 
 bernardofire.followers  # returns a list of users objects
 => [#<User:0x0000000259ea28
@@ -25,7 +36,7 @@ bernardofire.followers  # returns a list of users objects
   @url="https://api.github.com/users/gabriellima">
   .....]
   
-bernardofire.following  # same thing of followers: returns a list of users objects
+bernardofire.following  # returns a list of users objects
 => [#<User:0x0000000259ea28
   @avatar_url=
    "https://secure.gravatar.com/avatar/8246391865d4f81c2eeca180c25467a5?d=https://a248.e.akamai.net/
@@ -42,6 +53,14 @@ bernardofire.public_repos  # returns a list of repos objects
   ....>,
   #<Repo:0x0000000230d9a8
   @name="RepoStapler"
+  ....>]
+  
+bernardofire.orgs  # returns a list of orgs objects which the user belongs
+[#<Org:0x00000001fddf08
+  @login="nsi-iff",
+  ....>,
+ #<Org:0x00000001fdbc08
+  @login="cobrateam",
   ....>]
 ```
 
