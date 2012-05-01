@@ -12,12 +12,13 @@ The booleans methods are automatically turned from "boolean_method" to "boolean_
 
 ## Usage
 
+**For now we just support User, Org, Issue and Repo.** (more documentation comming soon)
+
 ### User
 ```ruby
 bernardofire = User.find('bernardofire') # returns an object with user's api attritbutes and methods
 => #<User:0x00000002098d58
- @bio="15 years old developer, working at NSI research group",
- @company="NSI"
+
  @login="bernardofire",
  @name="Bernardo Barreto",
  .....>
@@ -27,22 +28,12 @@ bernardofire.type  # => "User"
 
 bernardofire.followers  # returns a list of users objects
 => [#<User:0x0000000259ea28
-  @avatar_url=
-   "https://secure.gravatar.com/avatar/8246391865d4f81c2eeca180c25467a5?d=https://a248.e.akamai.net/
-   assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-  @gravatar_id="8246391865d4f81c2eeca180c25467a5",
-  @id=487779,
   @login="gabriellima",
   @url="https://api.github.com/users/gabriellima">
   .....]
   
 bernardofire.following  # returns a list of users objects
 => [#<User:0x0000000259ea28
-  @avatar_url=
-   "https://secure.gravatar.com/avatar/8246391865d4f81c2eeca180c25467a5?d=https://a248.e.akamai.net/
-   assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
-  @gravatar_id="8246391865d4f81c2eeca180c25467a5",
-  @id=487779,
   @login="gabriellima",
   @url="https://api.github.com/users/gabriellima">
   .....]
