@@ -1,6 +1,5 @@
 # encoding: utf-8
 require "spec_helper"
-include FakeWebHelper
 
 describe Org do
   context "without authentication" do
