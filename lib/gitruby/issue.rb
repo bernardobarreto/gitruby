@@ -10,6 +10,6 @@ class Issue
   end
 
   def self.find(owner_login, repository, issue_number)
-    new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}/issues/#{issue_number}")
+    new(HTTParty.get "#{API_URL}repos/#{owner_login}/#{repository}/issues/#{issue_number}")
   end
 end

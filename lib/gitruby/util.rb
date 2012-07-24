@@ -1,5 +1,5 @@
 module Util
-  BASE_URL = 'https://api.github.com/'
+  API_URL = 'https://api.github.com/'
 
   def load_lazing_attrs(params)
     params.each do |attr, value|

@@ -11,23 +11,23 @@ class Org
   end
 
   def self.find(name)
-    new(HTTParty.get "#{BASE_URL}orgs/#{name}")
+    new(HTTParty.get "#{API_URL}orgs/#{name}")
   end
 
   def members(options=nil)
     options = format_options(options)
-    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/members#{options}"
+    params = HTTParty.get "#{API_URL}orgs/#{@login}/members#{options}"
     params.map { |member| User.find(member['login']) }
   end
 
   def public_repos(options=nil)
     options = format_options(options)
-    params = HTTParty.get "#{BASE_URL}orgs/#{@login}/repos#{options}"
+    params = HTTParty.get "#{API_URL}orgs/#{@login}/repos#{options}"
     params.map { |repo| Repo.new(repo) }
   end
 
   def method_missing(method, *args)
-    params = HTTParty.get "#{BASE_URL}orgs/#{@login}"
+    params = HTTParty.get "#{API_URL}orgs/#{@login}"
     if params.has_key? method.to_s
       load_lazing_attrs(params)
     else

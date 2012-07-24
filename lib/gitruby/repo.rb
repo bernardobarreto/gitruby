@@ -12,24 +12,24 @@ class Repo
   end
 
   def self.find(owner_login, repository)
-    new(HTTParty.get "#{BASE_URL}repos/#{owner_login}/#{repository}")
+    new(HTTParty.get "#{API_URL}repos/#{owner_login}/#{repository}")
   end
 
   def forks(options=nil)
     options = format_options(options)
-    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/forks#{options}"
+    params = HTTParty.get "#{API_URL}repos/#{@owner['login']}/#{@name}/forks#{options}"
     params.map { |fork| Repo.new(fork) }
   end
 
   def collaborators(options=nil)
     options = format_options(options)
-    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/collaborators#{options}"
+    params = HTTParty.get "#{API_URL}repos/#{@owner['login']}/#{@name}/collaborators#{options}"
     params.map { |user| User.new(user) }
   end
 
   def issues(options=nil)
     options = format_options(options)
-    params = HTTParty.get "#{BASE_URL}repos/#{@owner['login']}/#{@name}/issues#{options}"
+    params = HTTParty.get "#{API_URL}repos/#{@owner['login']}/#{@name}/issues#{options}"
     params.map { |issue| Issue.new(issue) }
   end
 
