@@ -1,5 +1,11 @@
 module Util
+  require 'httparty'
+
   API_URL = 'https://api.github.com/'
+
+  def get(url)
+    HTTParty.get(url)
+  end
 
   def load_lazing_attrs(params)
     params.each do |attr, value|

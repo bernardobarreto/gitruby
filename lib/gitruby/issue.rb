@@ -13,6 +13,6 @@ class Issue
   end
 
   def self.find(owner_login, repository, issue_number)
-    new(self.get "#{API_URL}repos/#{owner_login}/#{repository}/issues/#{issue_number}")
+    new(get "#{API_URL}repos/#{owner_login}/#{repository}/issues/#{issue_number}")
   end
 end

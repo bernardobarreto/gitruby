@@ -14,23 +14,23 @@ class Org
   end
 
   def self.find(name)
-    new(self.get "#{API_URL}orgs/#{name}")
+    new(get "#{API_URL}orgs/#{name}")
   end
 
   def members(options=nil)
     options = format_options(options)
-    params = self.class.get "#{API_URL}orgs/#{@login}/members#{options}"
+    params = get "#{API_URL}orgs/#{@login}/members#{options}"
     params.map { |member| User.find(member['login']) }
   end
 
   def public_repos(options=nil)
     options = format_options(options)
-    params = self.class.get "#{API_URL}orgs/#{@login}/repos#{options}"
+    params = get "#{API_URL}orgs/#{@login}/repos#{options}"
     params.map { |repo| Repo.new(repo) }
   end
 
   def method_missing(method, *args)
-    params = self.class.get "#{API_URL}orgs/#{@login}"
+    params = get "#{API_URL}orgs/#{@login}"
     if params.has_key? method.to_s
       load_lazing_attrs(params)
     else
