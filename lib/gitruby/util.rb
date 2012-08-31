@@ -7,6 +7,15 @@ module Util
     HTTParty.get(url)
   end
 
+  def get_data(options, name)
+    options = format_options(options)
+    types = { members: User, following: User, followers: User, orgs: Org, repos: Repo }
+    if self.class == User
+      params = get "#{API_URL}users/#{@login}/#{name}#{options}"
+      objects = params.map { |x| types[name].new(x) }
+    end
+  end
+
   def load_lazing_attrs(params)
     params.each do |attr, value|
       methods = ['forks', 'public_repos']

@@ -17,27 +17,19 @@ class User
   end
 
   def orgs(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}users/#{@login}/orgs#{options}"
-    @orgs = params.map { |org| Org.new(org) }
+    get_data(options, :orgs)
   end
 
   def public_repos(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}users/#{@login}/repos#{options}"
-    params.map { |repo| Repo.new(repo) }
+    get_data(options, :repos)
   end
 
   def followers(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}users/#{@login}/followers#{options}"
-    params.map { |user| User.new(user) }
+    get_data(options, :followers)
   end
 
   def following(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}users/#{@login}/following#{options}"
-    params.map { |user| User.new(user) }
+    get_data(options, :following)
   end
 
   def method_missing(method, *args)
