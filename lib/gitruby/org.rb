@@ -23,6 +23,13 @@ class Org
     get_data(options, :repos)
   end
 
+  def get_data(options, name)
+    options = format_options(options)
+    types = { members: User, repos: Repo }
+    params = get "#{API_URL}orgs/#{@login}/#{name}#{options}"
+    params.map { |x| types[name].new(x) }
+  end
+
   def method_missing(method, *args)
     params = get "#{API_URL}orgs/#{@login}"
     if params.has_key? method.to_s

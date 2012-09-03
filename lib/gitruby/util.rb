@@ -14,8 +14,6 @@ module Util
         assignees: User, repos: Repo }
     if self.class == User
       params = get "#{API_URL}users/#{@login}/#{name}#{options}"
-    elsif self.class == Org
-      params = get "#{API_URL}orgs/#{@login}/#{name}#{options}"
     end
     params.map { |x| types[name].new(x) }
   end
