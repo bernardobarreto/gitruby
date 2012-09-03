@@ -30,6 +30,10 @@ class Repo
     get_data(options, :issues)
   end
 
+  def assignees(options=nil)
+    get_data(options, :assignees)
+  end
+
   def issue(number)
     Issue.find(@owner['login'], @name, number)
   end

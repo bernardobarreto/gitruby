@@ -10,7 +10,8 @@ module Util
   def get_data(options, name)
     options = format_options(options)
     types = { members: User, following: User, followers: User, orgs: Org,
-        forks: Repo, public_repos: Repo, collaborators: User, issues: Issue, repos: Repo }
+        forks: Repo, public_repos: Repo, collaborators: User, issues: Issue,
+        assignees: User, repos: Repo }
     if self.class == User
       params = get "#{API_URL}users/#{@login}/#{name}#{options}"
     elsif self.class == Repo

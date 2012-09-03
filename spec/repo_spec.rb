@@ -98,5 +98,10 @@ describe Repo do
       issue = repo.issues(page: 2)[0]
       issue.title.should == 'issue page 2'
     end
+
+    it 'should return avaible assignees for a repo' do
+      repo = Repo.find('octocat', 'hello-world')
+      repo.assignees[0].login.should == 'octodog'
+    end
   end
 end
