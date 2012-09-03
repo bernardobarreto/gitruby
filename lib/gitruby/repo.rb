@@ -8,8 +8,6 @@ class Repo
   include Util
   include HTTParty
 
-  base_uri API_URL
-
   def initialize(params)
     load_lazing_attrs(params)
   end
