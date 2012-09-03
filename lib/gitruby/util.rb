@@ -9,11 +9,14 @@ module Util
 
   def get_data(options, name)
     options = format_options(options)
-    types = { members: User, following: User, followers: User, orgs: Org, repos: Repo }
+    types = { members: User, following: User, followers: User, orgs: Org,
+        forks: Repo, collaborators: User, issues: Issue, repos: Repo }
     if self.class == User
       params = get "#{API_URL}users/#{@login}/#{name}#{options}"
-      objects = params.map { |x| types[name].new(x) }
+    elsif self.class == Repo
+      params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/#{name}#{options}"
     end
+    objects = params.map { |x| types[name].new(x) }
   end
 
   def load_lazing_attrs(params)

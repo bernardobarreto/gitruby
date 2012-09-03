@@ -19,21 +19,15 @@ class Repo
   end
 
   def forks(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/forks#{options}"
-    params.map { |fork| Repo.new(fork) }
+    get_data(options, :forks)
   end
 
   def collaborators(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/collaborators#{options}"
-    params.map { |user| User.new(user) }
+    get_data(options, :collaborators)
   end
 
   def issues(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/issues#{options}"
-    params.map { |issue| Issue.new(issue) }
+    get_data(options, :issues)
   end
 
   def issue(number)
