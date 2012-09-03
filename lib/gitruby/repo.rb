@@ -37,4 +37,11 @@ class Repo
   def issue(number)
     Issue.find(@owner['login'], @name, number)
   end
+
+  def get_data(options, name)
+    options = format_options(options)
+    types = { forks: Repo, collaborators: User, issues: Issue, assignees: User }
+    params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/#{name}#{options}"
+    params.map { |x| types[name].new(x) }
+  end
 end
