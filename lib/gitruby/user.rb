@@ -30,6 +30,13 @@ class User
     get_data(options, :following)
   end
 
+  def get_data(options, name)
+    options = format_options(options)
+    types = { orgs: Org, repos: Repo, following: User, followers: User }
+    params = get "#{API_URL}users/#{@login}/#{name}#{options}"
+    params.map { |x| types[name].new(x) }
+  end
+
   def method_missing(method, *args)
     params = get "#{API_URL}users/#{@login}"
     if params.has_key? method.to_s
