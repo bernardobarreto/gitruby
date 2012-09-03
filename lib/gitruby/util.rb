@@ -10,13 +10,15 @@ module Util
   def get_data(options, name)
     options = format_options(options)
     types = { members: User, following: User, followers: User, orgs: Org,
-        forks: Repo, collaborators: User, issues: Issue, repos: Repo }
+        forks: Repo, public_repos: Repo, collaborators: User, issues: Issue, repos: Repo }
     if self.class == User
       params = get "#{API_URL}users/#{@login}/#{name}#{options}"
     elsif self.class == Repo
       params = get "#{API_URL}repos/#{@owner['login']}/#{@name}/#{name}#{options}"
+    elsif self.class == Org
+      params = get "#{API_URL}orgs/#{@login}/#{name}#{options}"
     end
-    objects = params.map { |x| types[name].new(x) }
+    params.map { |x| types[name].new(x) }
   end
 
   def load_lazing_attrs(params)

@@ -7,8 +7,6 @@ class Org
   include Util
   include HTTParty
 
-  base_uri API_URL
-
   def initialize(params)
     load_lazing_attrs(params)
   end
@@ -18,15 +16,11 @@ class Org
   end
 
   def members(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}orgs/#{@login}/members#{options}"
-    params.map { |member| User.find(member['login']) }
+    get_data(options, :members)
   end
 
   def public_repos(options=nil)
-    options = format_options(options)
-    params = get "#{API_URL}orgs/#{@login}/repos#{options}"
-    params.map { |repo| Repo.new(repo) }
+    get_data(options, :repos)
   end
 
   def method_missing(method, *args)
