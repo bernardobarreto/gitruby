@@ -23,6 +23,8 @@ class Org
     get_data(options, :repos)
   end
 
+  private
+
   def get_data(options, name)
     options = format_options(options)
     types = { members: User, repos: Repo }

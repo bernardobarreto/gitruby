@@ -36,6 +36,8 @@ class Repo
     Issue.find(@owner['login'], @name, number)
   end
 
+  private
+
   def get_data(options, name)
     options = format_options(options)
     types = { forks: Repo, collaborators: User, issues: Issue, assignees: User }

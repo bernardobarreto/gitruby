@@ -30,6 +30,8 @@ class User
     get_data(options, :following)
   end
 
+  private
+
   def get_data(options, name)
     options = format_options(options)
     types = { orgs: Org, repos: Repo, following: User, followers: User }
