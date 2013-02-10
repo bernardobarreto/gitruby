@@ -1,4 +1,4 @@
-# gitruby [![Build Status](https://secure.travis-ci.org/pengwynn/octokit.png?branch=master)][travis]
+# gitruby [![Build Status](https://secure.travis-ci.org/bernardofire/gitruby.png?branch=master)][travis]
 
 [travis]: http://travis-ci.org/bernardofire/gitruby
 
@@ -22,7 +22,7 @@ bernardofire = User.find('bernardofire') # returns an object with user's api att
  @login="bernardofire",
  @name="Bernardo Barreto",
  .....>
- 
+
 bernardofire.id  # => 824254
 bernardofire.type  # => "User"
 
@@ -31,13 +31,13 @@ bernardofire.followers  # returns a list of users objects
   @login="gabriellima",
   @url="https://api.github.com/users/gabriellima">
   .....]
-  
+
 bernardofire.following  # returns a list of users objects
 => [#<User:0x0000000259ea28
   @login="gabriellima",
   @url="https://api.github.com/users/gabriellima">
   .....]
-  
+
 bernardofire.public_repos  # returns a list of repos objects
 => [#<Repo:0x00000001c46818
   @name="gitruby"
@@ -45,7 +45,7 @@ bernardofire.public_repos  # returns a list of repos objects
   #<Repo:0x0000000230d9a8
   @name="RepoStapler"
   ....>]
-  
+
 bernardofire.orgs  # returns a list of orgs objects which the user belongs
 [#<Org:0x00000001fddf08
   @login="nsi-iff",
