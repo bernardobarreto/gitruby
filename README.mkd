@@ -4,7 +4,7 @@
 
 Yet another github api wrapper in ruby
 ### Tips
-You should me familiar with de github api (developer.github.com)
+You should be familiar with the github api (developer.github.com)
 
 ### Conventions
 The booleans methods are automatically turned from "boolean_method" to "boolean_method?".
