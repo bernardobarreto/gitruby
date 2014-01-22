@@ -70,3 +70,7 @@ bernardofire.orgs  # returns a list of orgs objects which the user belongs
 Copyright (c) 2012 Bernardo B. Marques. See LICENSE.txt for
 further details.
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/bernardofire/gitruby/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
